@@ -18,7 +18,13 @@ const PasswordItem: React.FC<PasswordItemProps> = ({ passwordList, setPasswordLi
     }
 
     function handleClick() {
-        setPasswordList([...passwordList, [input.website, input.username, input.password]]);
+        if (input.website && input.username && input.password) {
+            setPasswordList([...passwordList, [input.website, input.username, input.password]]);
+            setInput({website: "", username: "", password: ""})
+        }
+        else {
+            alert("Enter all three fields before submitting.")
+        }
     }
     return <>
         <div className="passwordItem">
@@ -56,7 +62,7 @@ const PasswordItem: React.FC<PasswordItemProps> = ({ passwordList, setPasswordLi
                 ></input>
             </div>
 
-            <button onClick={handleClick}>Add password</button>
+            <button className="submitButton" onClick={handleClick}>Save password</button>
         </div>
     </>
 }
