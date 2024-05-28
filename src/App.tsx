@@ -1,10 +1,22 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import PasswordItem from "./components/Password/PasswordItem";
 
 function App() {
     const [passwordList, setPasswordList] = useState<any[]>([]);
     const [showPasswords, setShowPasswords] = useState<boolean[]>(Array(passwordList.length).fill(false));
+
+    // Fetch the existing passwords form the file, at the start of the app.
+    useEffect(() => {
+    fetch('/Passwords.json')
+      .then(response => response.text())
+      .then(data => {
+        const passwordsArray = JSON.parse(data);
+        setPasswordList(passwordsArray);
+        setShowPasswords(Array(passwordsArray.length).fill(false));
+      })
+      .catch(err => console.error('Error fetching file:', err));
+  }, []);
 
     function togglePasswordVisibility(index: number) {
         const newShowPasswords = [...showPasswords];
