@@ -1,4 +1,4 @@
-Manage your passwords with this chrome extension.
+Manage your passwords with this Chrome extension.
 
 How to use:
 
